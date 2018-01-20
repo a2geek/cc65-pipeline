@@ -67,7 +67,7 @@ build:
   script:
   - make hello
   - make clean
-  - ac -pro140 hello.po
+  - ac -pro140 hello.po HELLO
   - cat hello | ac -cc65 hello.po hello BIN
   - ac -l hello.po
   - nulib2 -ak hello.shk hello.po
