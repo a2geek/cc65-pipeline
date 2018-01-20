@@ -2,16 +2,42 @@ FROM alpine:latest
 
 LABEL description="This is a cc65 Docker container intended to be used for build pipelines."
 
-ENV VERSION="V2.16"
+ENV BUILD_DIR="/tmp" \
+    CC65_VERSION="V2.16" \
+    NULIB2_VERSION="v3.1.0" \
+    AC_VERSION="1.3.5.14"
+
+COPY bin /usr/local/bin
 
 RUN apk add --no-cache build-base && \
-    wget -P /tmp https://github.com/cc65/cc65/archive/${VERSION}.tar.gz && \
-    cd /tmp && \
-    tar xzf *.tar.gz && \
+    echo "Building CC65 ${CC65_VERSION}" && \
+    cd ${BUILD_DIR} && \
+    wget https://github.com/cc65/cc65/archive/${CC65_VERSION}.tar.gz && \
+    tar xzf ${CC65_VERSION}.tar.gz && \
     cd cc65* && \
     env prefix=/usr/local make && \
     env prefix=/usr/local make install && \
-    cd - && \
-    rm -rf *.tar.gz cc65* && \
+    echo "Building NuLib2 ${NULIB2_VERSION}" && \
+    cd ${BUILD_DIR} && \
+    wget https://github.com/fadden/nulib2/archive/${NULIB2_VERSION}.tar.gz && \
+    tar xzf ${NULIB2_VERSION}.tar.gz && \
+    cd nulib2* && \
+    cd nufxlib && \
+    ./configure && \
+    make && \
+    make install && \
+    cd ../nulib2 && \
+    ./configure && \
+    make && \
+    make install && \
+    echo "Adding AppleCommander" && \
+    wget https://sites.google.com/site/drjohnbmatthews/applecommander/AppleCommander-${AC_VERSION}-ac.jar && \
+    mkdir -p /usr/local/share/java && \
+    mv AppleCommander-${AC_VERSION}-ac.jar /usr/local/share/java/AppleCommander-ac.jar && \
+    echo "Cleaning up" && \
+    cd ${BUILD_DIR} && \
+    rm -rf * && \
     apk del --no-cache build-base && \
-    apk add --no-cache make
+    echo "Adding other required build-tools exclusive of other C compilers!" && \
+    apk add --no-cache make openjdk8-jre && \
+    chmod +x /usr/local/bin/*
