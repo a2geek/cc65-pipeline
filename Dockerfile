@@ -9,7 +9,7 @@ RUN apk add --no-cache build-base && \
     cd /tmp && \
     tar xzf *.tar.gz && \
     cd cc65* && \
-    make && \
+    env prefix=/usr/local make && \
     env prefix=/usr/local make install && \
     cd - && \
     rm -rf *.tar.gz cc65* && \
