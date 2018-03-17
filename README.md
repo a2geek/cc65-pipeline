@@ -23,8 +23,7 @@ to submit a pull request!
 
 * [NuLib2](http://nulib.com/) to support creation of ShrinkIt archives.
 * [AppleCommander](https://applecommander.github.io/) to support creation of disk
-  images.  Specifically [John Matthews'](https://sites.google.com/site/drjohnbmatthews/applecommander)
-  `ac` command is present.
+  images.
 
 # Samples
 
@@ -66,9 +65,8 @@ build:
   stage: build
   script:
   - make hello
-  - make clean
   - ac -pro140 hello.po HELLO
-  - cat hello | ac -cc65 hello.po hello BIN
+  - cat hello | ac -as hello.po hello
   - ac -l hello.po
   - nulib2 -ak hello.shk hello.po
   - nulib2 -v hello.shk

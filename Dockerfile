@@ -3,9 +3,10 @@ FROM alpine:latest
 LABEL description="This is a cc65 Docker container intended to be used for build pipelines."
 
 ENV BUILD_DIR="/tmp" \
-    CC65_VERSION="V2.16" \
+    CC65_VERSION="V2.17" \
     NULIB2_VERSION="v3.1.0" \
-    AC_VERSION="1.3.5.14"
+    AC_RELEASE="v1-4-0" \
+    AC_VERSION="1.4.0"
 
 COPY bin /usr/local/bin
 
@@ -15,8 +16,8 @@ RUN apk add --no-cache build-base && \
     wget https://github.com/cc65/cc65/archive/${CC65_VERSION}.tar.gz && \
     tar xzf ${CC65_VERSION}.tar.gz && \
     cd cc65* && \
-    env prefix=/usr/local make && \
-    env prefix=/usr/local make install && \
+    env PREFIX=/usr/local make && \
+    env PREFIX=/usr/local make install && \
     echo "Building NuLib2 ${NULIB2_VERSION}" && \
     cd ${BUILD_DIR} && \
     wget https://github.com/fadden/nulib2/archive/${NULIB2_VERSION}.tar.gz && \
@@ -31,9 +32,9 @@ RUN apk add --no-cache build-base && \
     make && \
     make install && \
     echo "Adding AppleCommander" && \
-    wget https://sites.google.com/site/drjohnbmatthews/applecommander/AppleCommander-${AC_VERSION}-ac.jar && \
+    wget https://github.com/AppleCommander/AppleCommander/releases/download/${AC_RELEASE}/AppleCommander-ac-${AC_VERSION}.jar && \
     mkdir -p /usr/local/share/java && \
-    mv AppleCommander-${AC_VERSION}-ac.jar /usr/local/share/java/AppleCommander-ac.jar && \
+    mv AppleCommander-ac-${AC_VERSION}.jar /usr/local/share/java/AppleCommander-ac.jar && \
     echo "Cleaning up" && \
     cd ${BUILD_DIR} && \
     rm -rf * && \
