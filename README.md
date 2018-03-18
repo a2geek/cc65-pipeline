@@ -76,20 +76,35 @@ build:
     - ./hello.shk
 ```
 
-The output from the `ac -l hello.po` command is:
+The output from the build plan is:
 ```
+$ make hello
+cl65 -t apple2     hello.c   -o hello
+$ ac -pro140 hello.po HELLO
+$ cat hello | ac -as hello.po hello
+$ ac -l hello.po
 hello.po /HELLO/
-  HELLO BIN 007 01/20/2018 01/20/2018 2,928 A=$0803
+  HELLO BIN 007 03/18/2018 03/18/2018 2,928 A=$0803
 ProDOS format; 136,192 bytes free; 7,168 bytes used.
-```
 
-The output from the `nulib2 -v hello.shk` command is:
-```
-hello.shk       Created:20-Jan-18 19:21   Mod:20-Jan-18 19:21     Recs:    1
+$ nulib2 -ak hello.shk hello.po
 
-Name                        Type Auxtyp Archived         Fmat Size Un-Length
+     adding       hello.po
+  0% compressing
+ 11% compressing
+<snip>
+DONE
+$ nulib2 -v hello.shk
+ hello.shk       Created:18-Mar-18 00:16   Mod:18-Mar-18 00:16     Recs:    1
+
+ Name                        Type Auxtyp Archived         Fmat Size Un-Length
 -----------------------------------------------------------------------------
-hello.po                    Disk 140k   20-Jan-18 19:21  lz2   02%    143360
+ hello.po                    Disk 140k   18-Mar-18 00:16  lz2   02%    143360
 -----------------------------------------------------------------------------
-Uncomp: 143360  Comp: 3248  %of orig: 2%
+ Uncomp: 143360  Comp: 3253  %of orig: 2%
+Uploading artifacts...
+./hello.po: found 1 matching files                 
+./hello.shk: found 1 matching files                
+Uploading artifacts to coordinator... ok            id=441 responseStatus=201 Created
+Job succeeded
 ```
