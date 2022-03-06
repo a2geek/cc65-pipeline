@@ -1,12 +1,8 @@
 # cc65 build agent
 
 This Docker image is intended to be used in a build pipeline to build
-6502/65c02/65816 projects.  It is simply a blend of
-[Alpine Linux](https://alpinelinux.org/) and
-[cc65](http://cc65.github.io/cc65/).
-
-In an effort to keep the image small, it currently only contains (beyond the base
-Alpine Linux Docker image) `make` and `cc65`.
+6502/65c02/65816 projects.  It is based on
+[Alpine Linux](https://alpinelinux.org/).
 
 Note that most tools are installed into `/usr/local` in some capacity and
 configured to be executed from there.  You can always run `docker run -it a2geek/cc65-pipeline /bin/sh`
@@ -22,8 +18,16 @@ to submit a pull request!
 ## Apple II
 
 * [NuLib2](http://nulib.com/) to support creation of ShrinkIt archives.
+* [cc65](http://cc65.github.io/cc65/) for C and assembly projects.
 * [AppleCommander](https://applecommander.github.io/) to support creation of disk
-  images.
+  images. The following utilities are included:
+  * [ac](https://applecommander.github.io/ac/) to manipulate disk images.
+  * [acx](https://applecommander.github.io/acx/) to manipulate disk images (alternate to 'ac').
+  * [bt](https://github.com/AppleCommander/bastools/blob/master/tools/bt/README.md) to transform an AppleSoft program from text back to its tokenized state.
+  * [st](https://github.com/AppleCommander/bastools/blob/master/tools/st/README.md) is a utility to manage AppleSoft shape tables.
+  * [asu](https://github.com/AppleCommander/applesingle/blob/master/tools/asu/README.md) to support manipulation of AppleSingle files.
+* From the Alpine packages:
+  * [binutils](https://www.gnu.org/software/binutils/)
 
 # Samples
 
