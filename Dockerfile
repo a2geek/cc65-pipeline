@@ -7,6 +7,7 @@ ENV BUILD_DIR="/tmp" \
     NULIB2_VERSION="v3.1.0" \
     AC_VERSION="1.7.0" \
     BASTOOLS_VERSION="0.3.1" \
+    ASU_VERSION="1.2.1"
 
 COPY bin /usr/local/bin
 
@@ -44,6 +45,9 @@ RUN apk add --no-cache build-base binutils && \
     echo "Adding bastools 'st'" && \
     wget https://github.com/AppleCommander/bastools/releases/download/v${BASTOOLS_VERSION}/bastools-tools-st-${BASTOOLS_VERSION}.jar && \
     mv bastools-tools-st-${BASTOOLS_VERSION}.jar /usr/local/share/java/bastools-st.jar && \
+    echo "Adding applesingle 'asu'" && \
+    wget https://github.com/AppleCommander/applesingle/releases/download/v${ASU_VERSION}/applesingle-tools-asu-${ASU_VERSION}.jar && \
+    mv applesingle-tools-asu-${ASU_VERSION}.jar /usr/local/share/java/applesingle-asu.jar && \
     echo "Cleaning up" && \
     cd ${BUILD_DIR} && \
     rm -rf * && \
