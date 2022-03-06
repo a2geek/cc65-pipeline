@@ -10,7 +10,7 @@ ENV BUILD_DIR="/tmp" \
 
 COPY bin /usr/local/bin
 
-RUN apk add --no-cache build-base && \
+RUN apk add --no-cache build-base binutils && \
     echo "Building CC65 ${CC65_VERSION}" && \
     cd ${BUILD_DIR} && \
     wget https://github.com/cc65/cc65/archive/${CC65_VERSION}.tar.gz && \
