@@ -5,7 +5,8 @@ LABEL description="This is a cc65 Docker container intended to be used for build
 ENV BUILD_DIR="/tmp" \
     CC65_VERSION="V2.19" \
     NULIB2_VERSION="v3.1.0" \
-    AC_VERSION="1.7.0"
+    AC_VERSION="1.7.0" \
+    BASTOOLS_VERSION="0.3.1" \
 
 COPY bin /usr/local/bin
 
@@ -37,6 +38,12 @@ RUN apk add --no-cache build-base binutils && \
     echo "Adding AppleCommander 'acx'" && \
     wget https://github.com/AppleCommander/AppleCommander/releases/download/${AC_VERSION}/AppleCommander-acx-${AC_VERSION}.jar && \
     mv AppleCommander-acx-${AC_VERSION}.jar /usr/local/share/java/AppleCommander-acx.jar && \
+    echo "Adding bastools 'bt'" && \
+    wget https://github.com/AppleCommander/bastools/releases/download/v${BASTOOLS_VERSION}/bastools-tools-bt-${BASTOOLS_VERSION}.jar && \
+    mv bastools-tools-bt-${BASTOOLS_VERSION}.jar /usr/local/share/java/bastools-bt.jar && \
+    echo "Adding bastools 'st'" && \
+    wget https://github.com/AppleCommander/bastools/releases/download/v${BASTOOLS_VERSION}/bastools-tools-st-${BASTOOLS_VERSION}.jar && \
+    mv bastools-tools-st-${BASTOOLS_VERSION}.jar /usr/local/share/java/bastools-st.jar && \
     echo "Cleaning up" && \
     cd ${BUILD_DIR} && \
     rm -rf * && \
