@@ -3,7 +3,7 @@ FROM alpine:latest
 LABEL description="This is a cc65 Docker container intended to be used for build pipelines."
 
 ENV BUILD_DIR="/tmp" \
-    CC65_VERSION="V2.17" \
+    CC65_VERSION="V2.19" \
     NULIB2_VERSION="v3.1.0" \
     AC_RELEASE="v1-4-0" \
     AC_VERSION="1.4.0"
