@@ -1,4 +1,6 @@
 # cc65 build agent
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/a2geek/cc65-pipeline)](https://github.com/a2geek/cc65-pipeline/releases)
+[![Docker Image Version (latest by date)](https://img.shields.io/docker/v/a2geek/cc65-pipeline)](https://hub.docker.com/r/a2geek/cc65-pipeline/)
 
 This Docker image is intended to be used in a build pipeline to build
 6502/65c02/65816 projects.  It is based on
