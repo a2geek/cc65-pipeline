@@ -5,9 +5,9 @@ LABEL description="This is a cc65 Docker container intended to be used for build
 ENV BUILD_DIR="/tmp" \
     CC65_VERSION="V2.19" \
     NULIB2_VERSION="v3.1.0" \
-    AC_VERSION="1.7.0" \
-    BASTOOLS_VERSION="0.3.1" \
-    ASU_VERSION="1.2.1"
+    AC_VERSION="1.9.0" \
+    BASTOOLS_VERSION="0.4.0" \
+    ASU_VERSION="1.2.2"
 
 COPY bin /usr/local/bin
 
